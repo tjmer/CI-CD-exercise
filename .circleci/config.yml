@@ -6,5 +6,5 @@ version: 2.1
 workflows:
   matrix-tests:
     jobs:
-      node/test:
+     - node/test:
         version: 16.7.0

@@ -1,10 +1,28 @@
-orbs:
-  node:  circleci/node@2.0.2
+# orbs:
+#   node:  circleci/node@2.0.2
 
-version: 2.1
+# version: 2.1
+
+# workflows:
+#   matrix-tests:
+#     jobs:
+#      - node/test:
+#         version: 16.7.0
+orbs: # declare what orbs we are going to use
+    node: circleci/node@2.0.2 # the node orb provides common node-related configuration
+
+version: 2.1 # using 2.1 provides access to orbs and other features
+
+jobs:
+    test:
+        docker:
+            - image: cimg/node:16.8.0
+        steps:
+            - checkout
+            - run: npm install
+            - run: npm run test
 
 workflows:
-  matrix-tests:
-    jobs:
-     - node/test:
-        version: 16.7.0
+    app-tests:
+        jobs:
+            - test
